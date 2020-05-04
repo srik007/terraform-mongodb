@@ -4,7 +4,7 @@ data "aws_ami" "image" {
 	
 	filter {
     name   = "name"
-    values = [join("_", [var.platform, "mongodb-${var.mongodb_version}","*"])]
+    values = [join("_", [var.platform, "mongodb-${var.mongodb_version}",var.version])]
   }
 }
 

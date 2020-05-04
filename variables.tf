@@ -58,7 +58,7 @@ variable "mongodb_version" {
   default = "4.2"
 }
 
-variable "version" {
+variable "ami_version" {
   description = "version of ami image"
   type = string
   default = "1.0"

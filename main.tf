@@ -13,8 +13,8 @@ data "template_file" "user_data" {
 }
 
 resource "aws_instance" "mongodb" {
-	 	count = var.instance_count
-	 	ami = var.ami == "" ? var.ami : data.aws_ami.image.id
+	 	ami = var.ami == "" ? data.aws_ami.image.id : var.ami
+    count = var.instance_count
 		instance_type = var.instance_type
 		subnet_id = var.subnet_id
     vpc_security_group_ids = var.vpc_security_group_ids

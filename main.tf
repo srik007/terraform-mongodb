@@ -8,25 +8,9 @@ data "aws_ami" "image" {
   }
 }
 
-data "template_file" "script" {
-  template = file("${path.module}/init.cfg")
+data "template_file" "user_data" {
+  template = file("${path.module}/user-data.sh")
 }
-
-data "template_cloudinit_config" "userdata" {
-  
-  part {
-    filename     = "init.cfg"
-    content_type = "text/cloud-config"
-    content      = "${data.template_file.script.rendered}"
-  }
-
-	 part {
-    content_type = "text/x-shellscript"
-    content      = file("${path.module}/user-data.sh")
-  }
-
-}
-
 
 resource "aws_instance" "mongodb" {
 	 	count = var.instance_count
@@ -37,6 +21,6 @@ resource "aws_instance" "mongodb" {
 		key_name = var.key_name
 		associate_public_ip_address = var.associate_public_ip_address
 		tags = var.tags
-		user_data= data.template_cloudinit_config.userdata.rendered
-	}
+		user_data= data.template_file.user_data.rendered
+}
 		

@@ -10,6 +10,7 @@ These types of resources are supported:
 
 ### Installation
 Install terrafrom using below documentation
+
 ``` https://learn.hashicorp.com/terraform/getting-started/install.html ```
 
 ### Dependencies 
